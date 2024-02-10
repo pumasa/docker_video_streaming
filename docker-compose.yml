@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  upload_video:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - authentication
+      - mysql
+      - file_system
+
+  video_streaming:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    depends_on:
+      - authentication
+      - mysql
+      - file_system
+
+  authentication:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+
+  file_system:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5003:5003"
+
+  mysql:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: video_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
