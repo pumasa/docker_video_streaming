@@ -6,7 +6,7 @@ services:
       context: ./upload_service
       dockerfile: Dockerfile
     ports:
-      - "5000:5000"
+      - "3003:3003"
     depends_on:
       - authentication
       - mysql
@@ -17,7 +17,7 @@ services:
       context: ./video_service
       dockerfile: Dockerfile
     ports:
-      - "5001:5001"
+      - "3001:3001"
     depends_on:
       - authentication
       - mysql
@@ -28,14 +28,14 @@ services:
       context: ./login_service
       dockerfile: Dockerfile
     ports:
-      - "5002:5002"
+      - "3000:3000"
 
   file_system:
     build:
       context: ./storage_service
       dockerfile: Dockerfile
     ports:
-      - "5003:5003"
+      - "3002:3002"
 
   mysql:
     build:
