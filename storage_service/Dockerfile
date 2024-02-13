@@ -1,7 +1,16 @@
-FROM alpine
+# FROM alpine
+# RUN mkdir /files
+# VOLUME /files
+# CMD ["tail", "-f", "/dev/null"]
 
-RUN mkdir /files
 
-VOLUME /files
+FROM node:14
 
-CMD ["tail", "-f", "/dev/null"]
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+
+RUN mkdir -p /app/uploads
+EXPOSE 3002
+CMD [ "node", "storage.js" ]
