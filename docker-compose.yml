@@ -3,7 +3,7 @@ version: '3'
 services:
   upload_video:
     build:
-      context: ./upload_video
+      context: ./upload_service
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
