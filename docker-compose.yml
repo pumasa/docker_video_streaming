@@ -3,7 +3,7 @@ version: '3'
 services:
   upload_video:
     build:
-      context: .
+      context: ./upload_video
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
@@ -14,7 +14,7 @@ services:
 
   video_streaming:
     build:
-      context: .
+      context: ./video_service
       dockerfile: Dockerfile
     ports:
       - "5001:5001"
@@ -25,26 +25,36 @@ services:
 
   authentication:
     build:
-      context: .
+      context: ./login_service
       dockerfile: Dockerfile
     ports:
       - "5002:5002"
 
   file_system:
     build:
-      context: .
+      context: ./storage_service
       dockerfile: Dockerfile
     ports:
       - "5003:5003"
 
   mysql:
     build:
-      context: .
+      context: ./database_service
       dockerfile: Dockerfile
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: video_db
-      MYSQL_USER: user
+      # MYSQL_ROOT_PASSWORD: root
+      # MYSQL_DATABASE: video_db
+      # MYSQL_USER: user
+      # MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: nodelogin
+      MYSQL_USER: mike
       MYSQL_PASSWORD: password
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
+
