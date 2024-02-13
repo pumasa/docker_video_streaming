@@ -7,10 +7,11 @@
 FROM node:14
 
 WORKDIR /app
-COPY package*.json ./
+COPY ../package*.json ./
 RUN npm install
 COPY . .
 
 RUN mkdir -p /app/uploads
 EXPOSE 3002
 CMD [ "node", "storage.js" ]
+
