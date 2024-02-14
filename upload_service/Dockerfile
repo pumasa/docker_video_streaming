@@ -8,4 +8,4 @@ COPY . .
 WORKDIR /app
 
 EXPOSE 3003
-CMD [ "/usr/local/bin/node", "upload.js" ]
+CMD [ "node", "upload.js" ]

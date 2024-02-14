@@ -8,4 +8,4 @@ COPY . .
 WORKDIR /app
 
 EXPOSE 3001
-CMD [ "/usr/local/bin/node", "stream.js" ]
+CMD [ "node", "stream.js" ]

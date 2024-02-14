@@ -16,4 +16,3 @@ WORKDIR /app
 RUN mkdir -p /app/uploads
 EXPOSE 3002
 CMD [ "node", "storage.js" ]
-
