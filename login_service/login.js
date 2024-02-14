@@ -2,20 +2,28 @@ const mysql = require('mysql2');
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
+const { error } = require('console');
 
 const connection = mysql.createConnection({
-	host     : '10.20.30.6',
-	user     : 'mike',
+	host     : 'mysql',
+	user     : 'sqluser',
 	password : 'password',
 	database : 'nodelogin'
+});
+
+connection.connect((err) => {
+  if (err) {
+    console.error('Error connecting to MySQL: ', err.stack);
+    return;
+  }
+  console.log('Successfully connected to MySQL as id ' + connection.threadId);
 });
 
 const app = express();
 
 app.set('view engine', 'ejs');
-app.set('views', path.resolve(__dirname, '../website/views'));
-
-app.use(express.static(path.resolve(__dirname, '../website/public')));
+app.set('views', path.resolve(__dirname, './website/views'));
+app.use(express.static(path.resolve(__dirname, './website/public')));
 
 app.use(session({
 	secret: 'secret',
@@ -108,6 +116,8 @@ app.get('/logout', function(request, response) {
         }
     });
 });
+
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
