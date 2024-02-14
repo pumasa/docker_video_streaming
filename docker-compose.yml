@@ -1,41 +1,6 @@
 version: '3'
 
 services:
-  upload_video:
-    build:
-      context: ./upload_service
-      dockerfile: Dockerfile
-    ports:
-      - "3003:3003"
-    depends_on:
-      - authentication
-      - mysql
-      - file_system
-
-  video_streaming:
-    build:
-      context: ./video_service
-      dockerfile: Dockerfile
-    ports:
-      - "3001:3001"
-    depends_on:
-      - authentication
-      - mysql
-      - file_system
-
-  authentication:
-    build:
-      context: ./login_service
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-
-  file_system:
-    build:
-      context: ./storage_service
-      dockerfile: Dockerfile
-    ports:
-      - "3002:3002"
 
   mysql:
     build:
@@ -50,6 +15,45 @@ services:
       MYSQL_PASSWORD: password
     volumes:
       - mysql_data:/var/lib/mysql
+
+  file_system:
+    build:
+      context: ./storage_service
+      dockerfile: Dockerfile
+    ports:
+      - "5002:3002"
+
+  authentication:
+    build:
+      context: ./login_service
+      dockerfile: Dockerfile
+    ports:
+      - "5000:3000"
+    depends_on:
+      - mysql
+
+  upload_video:
+    build:
+      context: ./upload_service
+      dockerfile: Dockerfile
+    ports:
+      - "5003:3003"
+    depends_on:
+      - authentication
+      - mysql
+      - file_system
+
+  video_streaming:
+    build:
+      context: ./video_service
+      dockerfile: Dockerfile
+    ports:
+      - "5001:3001"
+    depends_on:
+      - authentication
+      - mysql
+      - file_system
+
 
 volumes:
   mysql_data:
