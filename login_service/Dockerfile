@@ -3,8 +3,8 @@ FROM node:14
 WORKDIR /app
 COPY login.js ./
 COPY package*.json ./
+COPY website /website 
 RUN npm install
-RUN mkdir -p website/views website/public
 COPY . .
 WORKDIR /app
 
