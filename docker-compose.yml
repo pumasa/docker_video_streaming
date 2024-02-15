@@ -56,13 +56,13 @@ services:
       context: ./upload_service
       dockerfile: Dockerfile
     ports:
-      - "3003:3003"
+      - "5003:3003"
     depends_on:
       - authentication
       - file_system
       - mysql
     volumes:
-      - shared_volume:/storage_service/uploads
+      - shared_volume:/upload_service/uploads
 
 
 volumes:
