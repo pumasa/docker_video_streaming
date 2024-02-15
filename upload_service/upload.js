@@ -13,6 +13,7 @@ const connection = mysql.createConnection({
 connection.connect((err) => {
 	if (err) {
         console.error('Error connecting to MySQL: ', err.stack);
+        process.exit(1);
 return;
 	}
 	console.log('Successfully connected to MySQL as id ' + connection.threadId);
@@ -37,6 +38,7 @@ const upload = multer({
 app.post('/upload', (req, res) => {
     upload(req, res, (err) => {
         if (err) {
+            console.error('Error uploading file:', err); // Log the error
             res.status(500).send('Error uploading file');
         } else {
             // Save the filename of the uploaded video to the database

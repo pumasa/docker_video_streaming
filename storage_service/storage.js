@@ -3,12 +3,15 @@ const fs = require('fs');
 const path = require('path');
 const app = express();
 
+const uploadsDir = '/storage_service/uploads';
+
 // Serve static files from the "uploads" directory
-app.use(express.static(path.join(__dirname, 'uploads')));
+// app.use(express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(uploadsDir));
 
 // Endpoint to get a list of uploaded videos
 app.get('/videos', (req, res) => {
-    fs.readdir('uploads', (err, files) => {
+    fs.readdir(uploadsDir, (err, files) => {
         if (err) {
             console.error(err);
             res.status(500).send('Error reading directory');
@@ -21,7 +24,7 @@ app.get('/videos', (req, res) => {
 // Endpoint to stream a video file
 app.get('/video/:filename', (req, res) => {
     const filename = req.params.filename;
-    const filePath = path.join(__dirname, 'uploads', filename);
+    const filePath = path.join(uploadsDir, filename);
 
     // Check if the file exists
     fs.stat(filePath, (err, stat) => {
