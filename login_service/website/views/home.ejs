@@ -1,17 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <!-- the font awesome library is used to add icons to our form -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <!-- include the stylesheet file -->
+    <link href="/style.css" rel="stylesheet" type="text/css">
     <title>Upload Video</title>
 </head>
 <body>
-    <h1>Upload Video</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <label for="video">Select video file:</label>
-        <input type="file" id="video" name="video" accept="video/*" required>
-        <br>
+    <div class="navbar">
+        <a href="http://localhost:3000/home">Upload</a>
+        <a href="http://localhost:3001/<%= user %>">Stream</a>
+        <a href="http://localhost:3000/logout">Logout</a>
+    </div>
+    <h1>Welcome <%= user %></h1>
+    <form action="http://localhost:3003/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="video" id="video" accept="video/*">
+        <input type="hidden" name="user" value="<%= user %>"> 
         <input type="submit" value="Upload">
     </form>
+
 </body>
 </html>
