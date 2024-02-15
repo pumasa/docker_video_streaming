@@ -95,7 +95,7 @@ app.post('/auth', function(request, response) {
 app.get('/home', function(request, response) {
 	// If the user is loggedin
     if (request.session.loggedin) {
-		response.render('upload', { user: request.session.username });
+		response.render('home', { user: request.session.username });
 	} else {
 		// Not logged in
 		response.send('Please login to view this page!');
