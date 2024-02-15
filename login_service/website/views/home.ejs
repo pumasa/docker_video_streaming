@@ -11,12 +11,12 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="http://localhost:3000/home">Upload</a>
-        <a href="http://localhost:3001/<%= user %>">Stream</a>
-        <a href="http://localhost:3000/logout">Logout</a>
+        <a href="/home">Upload</a>
+        <a href="/stream">Stream</a>
+        <a href="/logout">Logout</a>
     </div>
     <h1>Welcome <%= user %></h1>
-    <form action="http://localhost:3003/upload" method="post" enctype="multipart/form-data">
+    <form action="/upload" method="post" enctype="multipart/form-data">
         <input type="file" name="video" id="video" accept="video/*">
         <input type="hidden" name="user" value="<%= user %>"> 
         <input type="submit" value="Upload">
