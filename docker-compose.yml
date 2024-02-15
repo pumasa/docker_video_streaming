@@ -61,6 +61,8 @@ services:
       - authentication
       - file_system
       - mysql
+    volumes:
+      - shared_volume:/storage_service/uploads
 
 
 volumes:

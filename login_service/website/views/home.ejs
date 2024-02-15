@@ -11,7 +11,12 @@
 </head>
 <body>
     <h1>Upload Video</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
+    <div class="navbar">
+        <a href="http://localhost:3000/home">Upload</a>
+        <a href="http://localhost:3001/<%= user %>">Stream</a>
+        <a href="http://localhost:3000/logout">Logout</a>
+    </div>
+    <form action="http://localhost:3003/upload" method="post" enctype="multipart/form-data">
         <label for="video">Select video file:</label>
         <input type="file" id="video" name="video" accept="video/*" required>
         <br>
