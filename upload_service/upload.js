@@ -22,7 +22,8 @@ return;
 // Set storage engine
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, '../storage_service/uploads/');
+        // Use the absolute path to the shared volume
+        cb(null, '/storage_service/uploads/');
     },
     filename: function(req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
@@ -51,7 +52,7 @@ app.post('/upload', (req, res) => {
                     res.status(500).send('Error inserting video into database');
                     return;
                 }
-                res.redirect('http://localhost:3000/home');
+                res.redirect('http://localhost:5000/home');
             });
         }
     });

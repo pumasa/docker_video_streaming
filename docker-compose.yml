@@ -21,7 +21,6 @@ services:
       timeout: 5s
       retries: 3
 
-
   file_system:
     build:
       context: ./storage_service
@@ -52,16 +51,18 @@ services:
   #     - file_system
   #     - mysql
 
-  # upload_video:
-  #   build:
-  #     context: ./upload_service
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "5003:3003"
-  #   depends_on:
-  #     - authentication
-  #     - file_system
-  #     - mysql
+  upload_video:
+    build:
+      context: ./upload_service
+      dockerfile: Dockerfile
+    ports:
+      - "5003:3003"
+    depends_on:
+      - authentication
+      - file_system
+      - mysql
+    volumes:
+      - shared_volume:/upload_service/uploads
 
 
 volumes:
