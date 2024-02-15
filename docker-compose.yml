@@ -15,6 +15,12 @@ services:
       MYSQL_PASSWORD: password
     volumes:
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -hlocalhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
 
   authentication:
     build:
@@ -23,29 +29,30 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
 
-  video_streaming:
-    build:
-      context: ./video_service
-      dockerfile: Dockerfile
-    ports:
-      - "5001:3001"
-    depends_on:
-      - authentication
-      - file_system
-      - mysql
+  # video_streaming:
+  #   build:
+  #     context: ./video_service
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "5001:3001"
+  #   depends_on:
+  #     - authentication
+  #     - file_system
+  #     - mysql
 
-  upload_video:
-    build:
-      context: ./upload_service
-      dockerfile: Dockerfile
-    ports:
-      - "5003:3003"
-    depends_on:
-      - authentication
-      - file_system
-      - mysql
+  # upload_video:
+  #   build:
+  #     context: ./upload_service
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "5003:3003"
+  #   depends_on:
+  #     - authentication
+  #     - file_system
+  #     - mysql
 
 
 volumes:
