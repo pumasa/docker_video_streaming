@@ -25,6 +25,29 @@ services:
     depends_on:
       - mysql
 
+  video_streaming:
+    build:
+      context: ./video_service
+      dockerfile: Dockerfile
+    ports:
+      - "5001:3001"
+    depends_on:
+      - authentication
+      - file_system
+      - mysql
+
+  upload_video:
+    build:
+      context: ./upload_service
+      dockerfile: Dockerfile
+    ports:
+      - "5003:3003"
+    depends_on:
+      - authentication
+      - file_system
+      - mysql
+
+
 volumes:
   mysql_data:
 

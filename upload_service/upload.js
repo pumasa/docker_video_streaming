@@ -4,10 +4,18 @@ const path = require('path');
 const app = express();
 const mysql = require('mysql2');
 const connection = mysql.createConnection({
-	host: '10.20.30.6',
-	user: 'mike',
+	host: 'mysql',
+	user: 'sqluser',
 	password: 'password',
 	database: 'nodelogin'
+});
+
+connection.connect((err) => {
+	if (err) {
+        console.error('Error connecting to MySQL: ', err.stack);
+return;
+	}
+	console.log('Successfully connected to MySQL as id ' + connection.threadId);
 });
 
 // Set storage engine
