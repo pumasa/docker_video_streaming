@@ -11,8 +11,8 @@ COPY storage.js ./
 COPY package*.json ./
 RUN npm install
 COPY . .
+RUN mkdir -p /storage_service/uploads
 WORKDIR /app
 
-RUN mkdir -p /app/uploads
 EXPOSE 3002
 CMD [ "node", "storage.js" ]
