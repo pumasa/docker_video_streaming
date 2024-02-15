@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const app = express();
 
-const uploadsDir = '/storage_service/uploads';
+const uploadsDir = '/uploads';
 
 // Serve static files from the "uploads" directory
 // app.use(express.static(path.join(__dirname, 'uploads')));

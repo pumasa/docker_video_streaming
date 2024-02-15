@@ -23,7 +23,7 @@ return;
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
         // Use the absolute path to the shared volume
-        cb(null, '/storage_service/uploads/');
+        cb(null, '/uploads/');
     },
     filename: function(req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));

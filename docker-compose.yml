@@ -28,7 +28,7 @@ services:
     ports:
       - "5002:3002"
     volumes:
-      - shared_volume:/storage_service/uploads
+      - shared_volume:/uploads
 
   authentication:
     build:
@@ -62,7 +62,7 @@ services:
       - file_system
       - mysql
     volumes:
-      - shared_volume:/upload_service/uploads
+      - shared_volume:/uploads
 
 
 volumes:
