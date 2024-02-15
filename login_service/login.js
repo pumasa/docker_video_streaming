@@ -48,20 +48,19 @@ app.get('/register', function(request, response) {
 });
 
 app.post('/register', (req, res) => {
-    const { username, password, email } = req.body;
-  
-    // Insert user into 'accounts' table
-    const sql = 'INSERT INTO accounts (username, password, email) VALUES (?, ?, ?)';
-    connection.query(sql, [username, password, email], (err, result) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send('Error registering user');
-      } else {
-        console.log('User registered successfully');
-        res.redirect('/');
-      }
-    });
-  });
+	const { username, email, password } = req.body;
+
+	const sql = 'INSERT INTO accounts (username, email, password) VALUES (?, ?, ?)';
+	connection.query(sql, [username, email, password], (err, result) => {
+		if (err) {
+			console.error('Error details:', err);
+			res.status(500).send('Error registering user');
+		} else {
+			console.log('User registered successfully');
+			res.redirect('/');
+		}
+	});
+});
 
 // http://localhost:3000/auth
 app.post('/auth', function(request, response) {
