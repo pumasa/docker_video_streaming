@@ -18,9 +18,9 @@ return;
 });
 
 app.set('view engine', 'ejs');
-app.set('views', path.resolve(__dirname, '../website/views'));
+app.set('views', path.resolve(__dirname, './website/views'));
 
-app.use(express.static(path.resolve(__dirname, '../website/public')));
+app.use(express.static(path.resolve(__dirname, './website/views')));
 
 // Define routes
 app.get('/:username', (req, res) => {
