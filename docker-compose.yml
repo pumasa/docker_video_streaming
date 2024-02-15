@@ -7,7 +7,7 @@ services:
       context: ./database_service
       dockerfile: Dockerfile
     ports:
-      - "3307:3306"
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: nodelogin
@@ -22,12 +22,21 @@ services:
       retries: 3
 
 
+  file_system:
+    build:
+      context: ./storage_service
+      dockerfile: Dockerfile
+    ports:
+      - "5002:3002"
+    volumes:
+      - shared_volume:/storage_service/uploads
+
   authentication:
     build:
       context: ./login_service
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "5000:3000"
     depends_on:
       mysql:
         condition: service_healthy
@@ -57,37 +66,4 @@ services:
 
 volumes:
   mysql_data:
-
-#   file_system:
-#     build:
-#       context: ./storage_service
-#       dockerfile: Dockerfile
-#     ports:
-#       - "5002:3002"
-
-
-#   upload_video:
-#     build:
-#       context: ./upload_service
-#       dockerfile: Dockerfile
-#     ports:
-#       - "5003:3003"
-#     depends_on:
-#       - authentication
-#       - mysql
-#       - file_system
-
-#   video_streaming:
-#     build:
-#       context: ./video_service
-#       dockerfile: Dockerfile
-#     ports:
-#       - "5001:3001"
-#     depends_on:
-#       - authentication
-#       - mysql
-#       - file_system
-
-
-
-
+  shared_volume:

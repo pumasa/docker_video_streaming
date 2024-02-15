@@ -4,10 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <!-- the font awesome library is used to add icons to our form -->
+    <link rel="stylesheet" type="text/css" href="/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-    <!-- include the stylesheet file -->
-    <link href="/style.css" rel="stylesheet" type="text/css">
-    <title>Upload Video</title>
+    <title>Video Streaming</title>
 </head>
 <body>
     <div class="navbar">
@@ -16,11 +15,11 @@
         <a href="http://localhost:3000/logout">Logout</a>
     </div>
     <h1>Welcome <%= user %></h1>
-    <form action="http://localhost:3003/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="video" id="video" accept="video/*">
-        <input type="hidden" name="user" value="<%= user %>"> 
-        <input type="submit" value="Upload">
-    </form>
-    
+    <% videoFiles.forEach(function(videoFile) { %>
+        <video width='500' height='300' controls>
+            <source src="http://localhost:3002/video/<%= videoFile %>" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    <% }); %>
 </body>
 </html>
