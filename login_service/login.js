@@ -12,11 +12,11 @@ const connection = mysql.createConnection({
 });
 
 connection.connect((err) => {
-  if (err) {
-    console.error('Error connecting to MySQL: ', err.stack);
-    return;
-  }
-  console.log('Successfully connected to MySQL as id ' + connection.threadId);
+	if (err) {
+		console.error('Error connecting to MySQL: ', err.stack);
+		process.exit(1);
+	}
+	console.log('Successfully connected to MySQL as id ' + connection.threadId);
 });
 
 const app = express();
@@ -121,3 +121,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
