@@ -22,6 +22,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5002:3002"
+    volumes:
+      - shared_volume:/storage_service/uploads
 
   authentication:
     build:
@@ -53,8 +55,10 @@ services:
       - authentication
       - file_system
       - mysql
+    volumes:
+      - shared_volume:/storage_service/uploads
 
 
 volumes:
   mysql_data:
-
+  shared_volume:
