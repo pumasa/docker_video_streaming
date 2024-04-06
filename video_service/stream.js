@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 const mysql = require('mysql2');
 const connection = mysql.createConnection({
-	host: 'mysql',
+	host: 'mysql-service',
 	user: 'sqluser',
 	password: 'password',
 	database: 'nodelogin'

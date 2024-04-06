@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: upload-deployment
+   namespace: default
+spec:
+   replicas: 1
+   selector:
+      matchLabels:
+         app: upload
+   template:
+      metadata:
+         labels:
+            app: upload
+      spec:
+         containers:
+            - name: upload
+              image: pumasy/upload_service:latest
+              ports:
+               - containerPort: 3003
+              volumeMounts:
+               - name: uploads-volume
+                 mountPath: /uploads
+         volumes:
+         - name: uploads-volume
+           persistentVolumeClaim:
+               claimName: shared-storage-pvc 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: upload-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 3003
+      targetPort: 3003
+  selector:
+    app: upload

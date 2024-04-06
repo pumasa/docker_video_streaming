@@ -1,9 +1,3 @@
-# FROM alpine
-# RUN mkdir /files
-# VOLUME /files
-# CMD ["tail", "-f", "/dev/null"]
-
-
 FROM node:14
 
 WORKDIR /app

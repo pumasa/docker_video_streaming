@@ -10,14 +10,14 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="http://localhost:5000/home">Upload</a>
-        <a href="http://localhost:5001/<%= user %>">Stream</a>
-        <a href="http://localhost:5000/logout">Logout</a>
+        <a href="http://localhost/home">Upload</a>
+        <a href="http://localhost/watch/<%= user %>">Stream</a>
+        <a href="http://localhost/logout">Logout</a>
     </div>
     <h1>Welcome <%= user %></h1>
     <% videoFiles.forEach(function(videoFile) { %>
         <video width='500' height='300' controls>
-            <source src="http://localhost:5002/video/<%= videoFile %>" type="video/mp4">
+            <source src="http://localhost:3002/<%= videoFile %>" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     <% }); %>

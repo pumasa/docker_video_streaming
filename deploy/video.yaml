@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: video-deployment
+   namespace: default
+spec:
+   replicas: 1
+   selector:
+      matchLabels:
+         app: video
+   template:
+      metadata:
+         labels:
+            app: video
+      spec:
+         containers:
+            - name: video
+              image: pumasy/video_service:latest
+              ports:
+                - containerPort: 3001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: video-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 3001
+      targetPort: 3001
+  selector:
+    app: video

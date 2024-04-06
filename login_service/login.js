@@ -5,7 +5,7 @@ const path = require('path');
 const { error } = require('console');
 
 const connection = mysql.createConnection({
-	host     : 'mysql',
+	host     : 'mysql-service',
 	user     : 'sqluser',
 	password : 'password',
 	database : 'nodelogin'

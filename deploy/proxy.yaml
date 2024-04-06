@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-reverse-proxy
+  labels:
+    app: nginx-reverse-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-reverse-proxy
+  template:
+    metadata:
+      labels:
+        app: nginx-reverse-proxy
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d/default.conf
+          subPath: default.conf
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  default.conf: |-
+    server {
+        listen       80;
+        listen  [::]:80;
+        server_name  localhost;
+
+        location / {
+          proxy_pass http://login-service:3000;
+        }
+
+        location /home {
+          proxy_pass http://login-service:3000/home;
+        }
+
+        location /logout {
+          proxy_pass http://login-service:3000/logout;
+        }
+
+        location /upload {
+          proxy_pass http://upload-service:3003;
+        }
+
+        client_max_body_size 640M;
+      }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: nginx-reverse-proxy

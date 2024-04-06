@@ -22,7 +22,7 @@ app.get('/videos', (req, res) => {
 });
 
 // Endpoint to stream a video file
-app.get('/video/:filename', (req, res) => {
+app.get('/:filename', (req, res) => {
     const filename = req.params.filename;
     const filePath = path.join(uploadsDir, filename);
 

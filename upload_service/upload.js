@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 const mysql = require('mysql2');
 const connection = mysql.createConnection({
-	host: 'mysql',
+	host: 'mysql-service',
 	user: 'sqluser',
 	password: 'password',
 	database: 'nodelogin'
@@ -52,7 +52,7 @@ app.post('/upload', (req, res) => {
                     res.status(500).send('Error inserting video into database');
                     return;
                 }
-                res.redirect('http://localhost:5000/home');
+                res.redirect('http://localhost/home');
             });
         }
     });
