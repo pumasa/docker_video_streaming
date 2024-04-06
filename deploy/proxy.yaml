@@ -55,6 +55,11 @@ data:
           proxy_pass http://upload-service:3003;
         }
 
+        location ~ ^/watch/(?<user>.*)$ {
+            rewrite ^/watch/(?<user>.*)$ /$user break;
+            proxy_pass http://video-service:3001;
+        }
+
         client_max_body_size 640M;
       }
 ---
