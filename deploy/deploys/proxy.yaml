@@ -40,7 +40,7 @@ data:
         server_name  localhost;
 
         location / {
-          proxy_pass http://login-service:3000;
+          proxy_pass http://34.105.119.50:3000;
         }
 
         location /home {
@@ -62,15 +62,3 @@ data:
 
         client_max_body_size 640M;
       }
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx-service
-spec:
-  type: LoadBalancer
-  ports:
-    - port: 80
-      targetPort: 80
-  selector:
-    app: nginx-reverse-proxy

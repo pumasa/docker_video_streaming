@@ -18,15 +18,3 @@ spec:
               image: pumasy/login_service:latest
               ports:
                 - containerPort: 3000
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: login-service
-spec:
-  type: LoadBalancer
-  ports:
-    - port: 3000
-      targetPort: 3000
-  selector:
-    app: login

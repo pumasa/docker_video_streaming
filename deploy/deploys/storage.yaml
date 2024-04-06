@@ -24,15 +24,3 @@ spec:
          - name: uploads-volume
            persistentVolumeClaim:
                claimName: shared-storage-pvc 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: storage-service
-spec:
-  type: LoadBalancer
-  ports:
-    - port: 3002
-      targetPort: 3002
-  selector:
-    app: storage
