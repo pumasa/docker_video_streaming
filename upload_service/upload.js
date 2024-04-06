@@ -52,7 +52,7 @@ app.post('/upload', (req, res) => {
                     res.status(500).send('Error inserting video into database');
                     return;
                 }
-                res.redirect('http://localhost/home');
+                res.redirect('../home');
             });
         }
     });
